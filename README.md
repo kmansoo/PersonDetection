@@ -8,16 +8,85 @@ This repository is based on OpenCV 3.x and Luna and is aiming at detecting a per
 * step3: build Luna
 * step4: build PersonDetection
 
-### Build FFmpeg
-Under construction
+### STEP1: Build FFmpeg
+When you build FFmpeg you have to be careful. If your target board is 32-bits, you must add the --enable-pic option.
 
-### Build OpenCV 3.x
-Under construction
+```bash
+cd ~/git
+git clone https://github.com/FFmpeg/FFmpeg.git
+cd FFmpeg
+```
 
-### Build Luna
-Under construction
+* For 32-bits processor like Raspberry Pi 2 or 3
+```bash
+./configure --enable-libfreetype --enable-gpl \
+            --enable-nonfree --enable-libx264 --enable-shared --enable-pic
+make
+sudo make install
+```
 
-### Build PersonDetection
-Under construction
+* For 64-bits processor like macOS, Linux
+```bash
+./configure --enable-libfreetype --enable-gpl \
+            --enable-nonfree --enable-libx264 --enable-shared --enable-pic
+make
+sudo make install
+```
+
+### STEP2: Build OpenCV 3.x
+```bash
+cd ~/git
+git clone https://github.com/opencv/opencv.git
+cd opencv
+mkdir build
+cd build
+cmake ..
+make
+sudo make install
+```
+
+### STEP3: Build Luna
+Luna needs curl and mbedTLS libraries because of supporting RESTful client using TLS.
+So you have to build those first before building Luna.
+
+```bash
+cd ~/git/PersonDetection
+git submodule init
+git submodule update
+cd ./dependency/Luna
+git submodule init
+git submodule update
+```
+
+* build curl and mbedTLS
+```bash
+cd ~/git/PersonDetection/dependency/Luna
+git submodule init
+git submodule update
+cd dependency
+mkdir build
+cd build
+cmake ..
+make
+```
+
+* build Luna
+```bash
+cd ~/git/PersonDetection/dependency/Luna
+mkdir build
+cd build
+cmake ..
+make
+```
+
+### STEP4: Build PersonDetection
+```bash
+cd ~/git/PersonDetection
+mkdir build
+cd build
+cmake ..
+make
+```
 
 # How to run
+Under construction
