@@ -39,7 +39,7 @@ bool ObjectDetection::use_background_subtractor(const cv::Mat &source_img,
   cv::resize(source_img, frame, cv::Size(source_img.cols * rate, source_img.rows * rate), 0.33, 0.33);
 
   // convert to grayscale
-  cvtColor(frame, gray_frame, CV_BGR2GRAY);
+  cvtColor(frame, gray_frame, cv::COLOR_RGB2GRAY);
 
   // add blur
   cv::GaussianBlur(gray_frame, gray_frame, cv::Size(21, 21), 0);
@@ -69,10 +69,10 @@ bool ObjectDetection::use_fast_object_detection(const cv::Mat &source_img, cv::M
   // scale down image
   float rate = 200 / source_img.cols;
 
-  cv::resize(source_img, frame, cv::Size(source_img.cols * rate, source_img.rows * rate), 0, 0, CV_INTER_NN);
+  cv::resize(source_img, frame, cv::Size(source_img.cols * rate, source_img.rows * rate), 0, 0, cv::INTER_LINEAR);
 
   // convert to grayscale
-  cvtColor(frame, gray_frame, CV_BGR2GRAY);
+  cvtColor(frame, gray_frame, cv::COLOR_RGB2GRAY);
 
   // add blur
   cv::GaussianBlur(gray_frame, gray_frame, cv::Size(source_img.cols * rate, source_img.rows * rate), 0);
