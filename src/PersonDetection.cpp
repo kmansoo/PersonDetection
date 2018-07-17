@@ -30,7 +30,7 @@ bool PersonDetection::detect(const cv::Mat &source_img,
   cv::Mat img;
   source_img.copyTo(img);
 
-  cvtColor(img, img, CV_BGR2GRAY);
+  cvtColor(img, img, cv::COLOR_BGR2GRAY);
   equalizeHist(img, img);
 
   std::vector<cv::Rect> detecting_rect[kDetector_MAX];
